@@ -1,0 +1,15 @@
+{
+  "name": "openapi",
+  "version": "1.0.0",
+  "description": "つながる自己紹介で使用するOpenAPI package",
+  "license": "ISC",
+  "scripts": {
+    "build:openapi": "./generate.sh"
+  },
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.2",
+    "openapi-typescript": "^5.1.1",
+    "redoc-cli": "^0.13.7",
+    "swagger-cli": "^4.0.4"
+  }
+}

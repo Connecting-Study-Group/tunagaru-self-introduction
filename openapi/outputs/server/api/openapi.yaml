@@ -1,0 +1,34 @@
+openapi: 3.0.2
+info:
+  contact:
+    email: codeyy021@gmail.com
+    name: tsunagaru
+  description: tsunagaru
+  title: tsunagaru
+  version: "1.0"
+servers:
+- description: Local server
+  url: https://localhost:8080
+tags:
+- description: ""
+  name: healthcheck
+paths:
+  /healthcheck:
+    get:
+      description: healthcheck
+      operationId: getHealthcheck
+      responses:
+        "200":
+          content:
+            text/plain:
+              examples:
+                example:
+                  value: OK
+              schema:
+                type: string
+          description: OK
+      summary: healthcheck
+      tags:
+      - healthcheck
+components:
+  schemas: {}

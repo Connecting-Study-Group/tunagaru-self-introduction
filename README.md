@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# tsunagaru-app
 
-## Getting Started
+## Tech Stack
 
-First, run the development server:
+**Client:** React, Next.js, TypeScript, Mantine, pathpida, Prettier, ESLint
+
+**Server:** Go
+
+**OpenAPI:** openapi
+
+## Set Up
 
 ```bash
-npm run dev
-# or
-yarn dev
+$ git clone https://github.com/Connecting-Study-Group/tunagaru-self-introduction.git
+
+$ cd tunagaru-self-introduction
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Client
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Client では pnpm を使用しています。もし install していない方がいればこの機会にお願いします 🙇‍♂️
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+#### pnpm のインストール
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+$ brew install pnpm
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+or
 
-## Learn More
+$ npm install -g pnpm
+```
 
-To learn more about Next.js, take a look at the following resources:
+#### set up
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+$ cd client
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+$ pnpm install
 
-## Deploy on Vercel
+rootに.envファイルを作成し、運営者（ユウト: code-yy)に環境変数を貰ってください。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+$ pnpm dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Server
+
+Go を採用しているので、まだインストールしていない方はお願いします 🙇‍♂️
+
+```bash
+$ brew install go
+
+& go version
+
+go version go1.19.2 ~~~~ みたいなのが表示されればOK!
+```
+
+#### set up
+
+```bash
+$ go run main.go
+
+localhost:8080が立ち上がります。
+```
+
+### OpenAPI
+
+スキーマ駆動開発を採用しているため、OpenAPI を採用しています。
+
+openapi.yaml ファイルを generate する際に内部で Java を使って行っているため、Java のインストールをお願いします 🙇‍♂️(Docker 使ってなくてマジですみません。)
+
+#### Java Install
+
+参考: https://zenn.dev/satokazur222/articles/66568417b291d8
+
+```bash
+$ brew update
+
+$ brew info java (まあまあ長いかもです😵)
+
+$ brew install java
+
+$ java --version
+
+$ sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+```
+
+#### Set Up
+
+```bash
+$ cd openapi
+
+$ yarn
+
+or
+
+$ yarn install
+```
+
+#### 使い方
+
+```bash
+## openapi
+$ https://stoplight.io/studioでopenapi.yamlを変更します。
+
+$ yarn build:package (openapi.yamlの内容が、/outputs配下に自動でgenerateされます)
+
+## client
+$ rm -r node_modules
+
+$ pnpm install
+
+## server
+$ ./generate.sh
+```
+
+## Feedback
+
+If you have any feedback, please reach out to us at fake@fake.com
