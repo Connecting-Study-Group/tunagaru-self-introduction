@@ -1,14 +1,14 @@
 import { NextPageWithLayout } from '@/next-type';
 import { DefaultLayout } from '@/views/features/Layouts/Default';
-import { IndexPage } from '@/views/pages';
+import { LoginPage } from '@/views/pages/Login';
 import { ReactElement } from 'react';
 
-const Index: NextPageWithLayout = () => {
-  return <IndexPage />;
+const Login: NextPageWithLayout = () => {
+  return <LoginPage />;
 };
 
-Index.getLayout = function getLayout(page: ReactElement) {
+Login.getLayout = function getLayout(page: ReactElement) {
   return <DefaultLayout>{page}</DefaultLayout>;
 };
 
-export default Index;
+export default Login;
