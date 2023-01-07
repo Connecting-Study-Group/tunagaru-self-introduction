@@ -12,6 +12,8 @@ servers:
 tags:
 - description: ""
   name: healthcheck
+- description: ""
+  name: user
 paths:
   /healthcheck:
     get:
@@ -30,5 +32,166 @@ paths:
       summary: healthcheck
       tags:
       - healthcheck
+  /user:
+    patch:
+      description: 自己紹介作成ページで使用する
+      operationId: update-user
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateUserRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Example response
+      summary: UpdateUser
+      tags:
+      - user
+    post:
+      description: Discordログイン時に使用する
+      operationId: create-user
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUserRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Example response
+      summary: CreateUser
+      tags:
+      - user
 components:
-  schemas: {}
+  requestBodies:
+    CreateUserRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/create_user_request'
+      description: ""
+    UpdateUserRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/update_user_request'
+  responses:
+    CreateUserResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+      description: Example response
+    UpdateUserResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+      description: Example response
+  schemas:
+    User:
+      example:
+        bio: bio
+        created_at: 2000-01-23T04:56:07.000+00:00
+        zenn_url: zenn_url
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        github_url: github_url
+        instagram_url: instagram_url
+        web_url: web_url
+        name: name
+        icon_image_url: icon_image_url
+        qiita_url: qiita_url
+        id: id
+        twitter_url: twitter_url
+        status: Frontend
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        bio:
+          type: string
+        icon_image_url:
+          type: string
+        status:
+          enum:
+          - Frontend
+          - Backend
+          - AI
+          - Infra
+          - Other
+          - Mobile
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        twitter_url:
+          type: string
+        github_url:
+          type: string
+        instagram_url:
+          type: string
+        web_url:
+          type: string
+        zenn_url:
+          type: string
+        qiita_url:
+          type: string
+      required:
+      - icon_image_url
+      - id
+      - name
+      title: User
+      type: object
+      x-stoplight:
+        id: mk7chflgfopnk
+    create_user_request:
+      properties:
+        name:
+          type: string
+        icon_image_url:
+          type: string
+      required:
+      - icon_image_url
+      - name
+      type: object
+    update_user_request:
+      properties:
+        name:
+          type: string
+        company:
+          type: string
+        job:
+          type: string
+        status:
+          enum:
+          - Backend
+          - Frontend
+          - Mobile
+          - Other
+          - Infra
+          - AI
+          type: string
+        bio:
+          type: string
+        icon_image_url:
+          type: string
+        twitter_url:
+          type: string
+        github_url:
+          type: string
+        instagram_url:
+          type: string
+        web_url:
+          type: string
+        zenn_url:
+          type: string
+        qiita_url:
+          type: string
+      type: object
+x-stoplight:
+  id: hgz3xwl29j9ii

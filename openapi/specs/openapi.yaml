@@ -1,23 +1,25 @@
 openapi: 3.0.2
+x-stoplight:
+  id: hgz3xwl29j9ii
 info:
   title: tsunagaru
-  version: "1.0"
+  version: '1.0'
   description: tsunagaru
   contact:
     name: tsunagaru
     email: codeyy021@gmail.com
 servers:
-  - url: https://localhost:8080
+  - url: 'https://localhost:8080'
     description: Local server
 paths:
-  "/healthcheck":
+  /healthcheck:
     get:
       summary: healthcheck
       description: healthcheck
       tags:
         - healthcheck
       responses:
-        "200":
+        '200':
           description: OK
           content:
             text/plain:
@@ -27,6 +29,144 @@ paths:
                 example:
                   value: OK
       operationId: getHealthcheck
+  /user:
+    post:
+      summary: CreateUser
+      tags:
+        - user
+      operationId: create-user
+      responses:
+        '200':
+          $ref: '#/components/responses/CreateUserResponse'
+      description: Discordログイン時に使用する
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUserRequest'
+    patch:
+      summary: UpdateUser
+      operationId: update-user
+      tags:
+        - user
+      responses:
+        '200':
+          $ref: '#/components/responses/UpdateUserResponse'
+      description: 自己紹介作成ページで使用する
+      requestBody:
+        $ref: '#/components/requestBodies/UpdateUserRequest'
 tags:
   - name: healthcheck
-    description: ""
+    description: ''
+  - name: user
+    description: ''
+components:
+  schemas:
+    User:
+      title: User
+      x-stoplight:
+        id: mk7chflgfopnk
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        bio:
+          type: string
+        icon_image_url:
+          type: string
+        status:
+          type: string
+          enum:
+            - Frontend
+            - Backend
+            - AI
+            - Infra
+            - Other
+            - Mobile
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        twitter_url:
+          type: string
+        github_url:
+          type: string
+        instagram_url:
+          type: string
+        web_url:
+          type: string
+        zenn_url:
+          type: string
+        qiita_url:
+          type: string
+      required:
+        - id
+        - name
+        - icon_image_url
+  requestBodies:
+    CreateUserRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              icon_image_url:
+                type: string
+            required:
+              - name
+              - icon_image_url
+      description: ''
+    UpdateUserRequest:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              company:
+                type: string
+              job:
+                type: string
+              status:
+                type: string
+                enum:
+                  - Backend
+                  - Frontend
+                  - Mobile
+                  - Other
+                  - Infra
+                  - AI
+              bio:
+                type: string
+              icon_image_url:
+                type: string
+              twitter_url:
+                type: string
+              github_url:
+                type: string
+              instagram_url:
+                type: string
+              web_url:
+                type: string
+              zenn_url:
+                type: string
+              qiita_url:
+                type: string
+  responses:
+    CreateUserResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+    UpdateUserResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+      headers: {}
