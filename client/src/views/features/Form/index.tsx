@@ -6,7 +6,6 @@ import { type FC, useState } from 'react';
 export const Form: FC = () => {
   const defaultValue: UpdateUser = {
     name: '',
-    email: '',
     company: '',
     job: '',
     status: '',
@@ -50,19 +49,6 @@ export const Form: FC = () => {
            */}
           <TextInput
             label="名前"
-            withAsterisk
-            required
-            sx={{
-              marginTop: '20px',
-            }}
-          />
-
-          {/**
-           * Email
-           * 初期値はdiscordのEmail
-           */}
-          <TextInput
-            label="Email"
             withAsterisk
             required
             sx={{

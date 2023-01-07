@@ -4,7 +4,8 @@
   "description": "つながる自己紹介で使用するOpenAPI package",
   "license": "ISC",
   "scripts": {
-    "build:openapi": "./generate.sh"
+    "build:openapi": "./generate.sh",
+    "lint": "npx @stoplight/spectral-cli lint openapi.yaml"
   },
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.2",

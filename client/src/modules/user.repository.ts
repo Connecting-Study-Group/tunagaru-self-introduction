@@ -1,6 +1,5 @@
 export type UpdateUser = {
   name: string;
-  email: string;
   company: string;
   job: string;
   status: string;
