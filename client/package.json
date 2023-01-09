@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "run-p dev:*",
+    "start": "next dev",
     "dev:next": "next dev",
     "dev:path": "pathpida --enableStatic --watch",
     "build": "pathpida --enableStatic && next build"
