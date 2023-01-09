@@ -8,7 +8,7 @@
     "dev:next": "next dev",
     "dev:path": "pathpida --enableStatic --watch",
     "build": "pathpida --enableStatic && next build",
-    "deploy": "./scripts/deploy.sh"
+    "openapi": "./scripts/deploy.sh"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -26,7 +26,7 @@
     "next": "13.1.1",
     "next-auth": "^4.18.7",
     "npm-run-all": "^4.1.5",
-    "openapi-app-client": "../openapi/outputs/openapi_client/ts",
+    "openapi-app-client": "./openapi_client/ts",
     "pathpida": "^0.20.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
