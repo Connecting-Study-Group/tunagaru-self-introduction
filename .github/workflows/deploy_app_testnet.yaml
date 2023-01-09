@@ -51,7 +51,7 @@ jobs:
 
       - name: build openapi
         run: |
-          npm run openapi
+          pnpm openapi
 
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./dist
