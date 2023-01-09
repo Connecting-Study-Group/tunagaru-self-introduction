@@ -1,0 +1,42 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - "client/**"
+      - ".github/workflows/deploy_app_testnet.yml"
+
+name: Build and Deploy Testnet App to Cloud Run
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: client
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: pnpm install and build
+        run: |
+          pnpm install
+          pnpm build
+
+      - name: build openapi
+        run: |
+          pnpm openapi
+
+      - name: Deploy to netlify
+        run: npx netlify-cli deploy --dir=./dist
+        env:
+          NETLIFY_AUTH_TOKEN: M9AHeEfRGInFQwecm6IQp_ItnDb3BIxeqZDa5G8lKwU
+          NETLIFY_SITE_ID: 1984aa77-cdeb-46ee-8d75-13d053e6111e
