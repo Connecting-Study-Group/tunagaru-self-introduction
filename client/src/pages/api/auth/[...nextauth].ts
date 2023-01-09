@@ -1,5 +1,5 @@
 import { userRepository } from './../../../modules/user.repository';
-import { discordClientId, discordClientSecret } from '@/constants/env';
+import { discordClientId, discordClientSecret, nextAuthSecret } from '@/constants/env';
 import { DiscordClient } from '@/lib/discord-client';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
@@ -68,6 +68,8 @@ export const authOptions: NextAuthOptions = {
       return false;
     },
   },
+
+  secret: nextAuthSecret,
 };
 
 export default NextAuth(authOptions);

@@ -6,3 +6,6 @@ export const discordClientSecret = process.env.DISCORD_CLIENT_SECRET;
 
 /** tsunagaru */
 export const tsunagaruDiscordId = process.env.TSUNAGARU_DISCORD_ID;
+
+/** NextAuth */
+export const nextAuthSecret = process.env.NEXTAUTH_SECRET;
