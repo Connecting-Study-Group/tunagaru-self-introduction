@@ -62,6 +62,11 @@ $ go run main.go
 localhost:8080が立ち上がります。
 ```
 
+#### oapi-codegen: command not found というエラーが出た場合
+
+Go のパスが通っていない可能性があります。
+[こちらの記事](https://selfnote.work/20210513/programming/go-error-command-not-found/)を参考に、path を通してください！🙇‍♂️
+
 ### OpenAPI
 
 スキーマ駆動開発を採用しているため、OpenAPI を採用しています。

@@ -27,19 +27,8 @@ func NewUserApiService() UserApiServicer {
 	return &UserApiService{}
 }
 
-// CreateUser - CreateUser
-func (s *UserApiService) CreateUser(ctx context.Context, createUserRequest CreateUserRequest) (ImplResponse, error) {
-	// TODO - update CreateUser with the required logic for this service method.
-	// Add api_user_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
-
-	//TODO: Uncomment the next line to return response Response(200, User{}) or use other options such as http.Ok ...
-	//return Response(200, User{}), nil
-
-	return Response(http.StatusNotImplemented, nil), errors.New("CreateUser method not implemented")
-}
-
 // UpdateUser - UpdateUser
-func (s *UserApiService) UpdateUser(ctx context.Context, updateUserRequest UpdateUserRequest) (ImplResponse, error) {
+func (s *UserApiService) UpdateUser(ctx context.Context, uid string, updateUserRequest UpdateUserRequest) (ImplResponse, error) {
 	// TODO - update UpdateUser with the required logic for this service method.
 	// Add api_user_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 

@@ -3,7 +3,7 @@ name: OpenAPI validation
 on:
   pull_request:
     paths:
-      - "openapi.yaml"
+      - "openapi/specs/openapi.yaml"
 
 jobs:
   lint:

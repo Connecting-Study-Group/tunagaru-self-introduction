@@ -14,10 +14,13 @@ type UpdateUserRequest struct {
 
 	Name string `json:"name,omitempty"`
 
+	Email string `json:"email,omitempty"`
+
 	Company string `json:"company,omitempty"`
 
 	Job string `json:"job,omitempty"`
 
+	// フロントエンドエンジニアなどのエンジニアとして詳細情報
 	Status string `json:"status,omitempty"`
 
 	Bio string `json:"bio,omitempty"`

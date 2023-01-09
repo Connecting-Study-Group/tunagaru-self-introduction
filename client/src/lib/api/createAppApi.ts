@@ -1,5 +1,5 @@
-import { apiBaseUrl } from "@/constants/env";
-import { Configuration, HealthcheckApi } from "openapi-app-client";
+import { apiBaseUrl } from '@/constants/env';
+import { Configuration, UserApi } from 'openapi-app-client';
 
 export const createAppApi = () => {
   const config = new Configuration({
@@ -18,6 +18,6 @@ export const createAppApi = () => {
   });
 
   return {
-    healthcheck: new HealthcheckApi(config),
+    user: new UserApi(config),
   };
 };

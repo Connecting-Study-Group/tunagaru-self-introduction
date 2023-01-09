@@ -32,6 +32,18 @@ export interface User {
      */
     name: string;
     /**
+     * Discordログインした際に取得できるIDを、UUIDとして登録する
+     * @type {string}
+     * @memberof User
+     */
+    uid: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof User
+     */
+    email: string;
+    /**
      * 
      * @type {string}
      * @memberof User
@@ -42,9 +54,15 @@ export interface User {
      * @type {string}
      * @memberof User
      */
-    iconImageUrl: string;
+    iconImageUrl?: string;
     /**
      * 
+     * @type {string}
+     * @memberof User
+     */
+    company?: string;
+    /**
+     * フロントエンドエンジニアなどのエンジニアとして詳細情報
      * @type {string}
      * @memberof User
      */
@@ -106,10 +124,10 @@ export interface User {
 export const UserStatusEnum = {
     Frontend: 'Frontend',
     Backend: 'Backend',
+    Mobile: 'Mobile',
     Ai: 'AI',
     Infra: 'Infra',
-    Other: 'Other',
-    Mobile: 'Mobile'
+    Other: 'Other'
 } as const;
 export type UserStatusEnum = typeof UserStatusEnum[keyof typeof UserStatusEnum];
 
@@ -121,7 +139,8 @@ export function instanceOfUser(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "id" in value;
     isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "iconImageUrl" in value;
+    isInstance = isInstance && "uid" in value;
+    isInstance = isInstance && "email" in value;
 
     return isInstance;
 }
@@ -138,8 +157,11 @@ export function UserFromJSONTyped(json: any, ignoreDiscriminator: boolean): User
         
         'id': json['id'],
         'name': json['name'],
+        'uid': json['uid'],
+        'email': json['email'],
         'bio': !exists(json, 'bio') ? undefined : json['bio'],
-        'iconImageUrl': json['icon_image_url'],
+        'iconImageUrl': !exists(json, 'icon_image_url') ? undefined : json['icon_image_url'],
+        'company': !exists(json, 'company') ? undefined : json['company'],
         'status': !exists(json, 'status') ? undefined : json['status'],
         'createdAt': !exists(json, 'created_at') ? undefined : (new Date(json['created_at'])),
         'updatedAt': !exists(json, 'updated_at') ? undefined : (new Date(json['updated_at'])),
@@ -163,8 +185,11 @@ export function UserToJSON(value?: User | null): any {
         
         'id': value.id,
         'name': value.name,
+        'uid': value.uid,
+        'email': value.email,
         'bio': value.bio,
         'icon_image_url': value.iconImageUrl,
+        'company': value.company,
         'status': value.status,
         'created_at': value.createdAt === undefined ? undefined : (value.createdAt.toISOString()),
         'updated_at': value.updatedAt === undefined ? undefined : (value.updatedAt.toISOString()),

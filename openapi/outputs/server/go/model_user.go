@@ -20,10 +20,18 @@ type User struct {
 
 	Name string `json:"name"`
 
+	// Discordログインした際に取得できるIDを、UUIDとして登録する
+	Uid string `json:"uid"`
+
+	Email string `json:"email"`
+
 	Bio string `json:"bio,omitempty"`
 
-	IconImageUrl string `json:"icon_image_url"`
+	IconImageUrl string `json:"icon_image_url,omitempty"`
 
+	Company string `json:"company,omitempty"`
+
+	// フロントエンドエンジニアなどのエンジニアとして詳細情報
 	Status string `json:"status,omitempty"`
 
 	CreatedAt time.Time `json:"created_at,omitempty"`
@@ -48,7 +56,8 @@ func AssertUserRequired(obj User) error {
 	elements := map[string]interface{}{
 		"id": obj.Id,
 		"name": obj.Name,
-		"icon_image_url": obj.IconImageUrl,
+		"uid": obj.Uid,
+		"email": obj.Email,
 	}
 	for name, el := range elements {
 		if isZero := IsZeroValue(el); isZero {

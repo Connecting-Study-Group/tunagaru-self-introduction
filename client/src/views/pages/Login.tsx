@@ -1,24 +1,10 @@
 import { Text, Button } from '@mantine/core';
-import { useEffect, useState } from 'react';
 import { LogoDiscord } from 'react-ionicons';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 
 export const LoginPage = () => {
+  // NOTE: このsessionがnullだった場合、ログインしていない判定にすれば良さそう
   const { data: session, status } = useSession();
-
-  useEffect(() => {
-    const get = async () => {
-      const res = await fetch('https://discordapp.com/api/users/@me/guilds', {
-        headers: {
-          Authorization: `Bearer ${session?.accessToken}`,
-        },
-      });
-      return res;
-    };
-    // get();
-  }, [session]);
-
-  console.log('session', session);
 
   return (
     <>
@@ -46,11 +32,8 @@ export const LoginPage = () => {
         sx={{ backgroundColor: 'white', border: 'solid 1px black' }}
         size="md"
         color="dark"
-        onClick={() => {
-          // https://discordapp.com/api/users/@me/guildsを叩く
-        }}
       >
-        Slackでログアウト
+        ログアウト
       </Button>
     </>
   );
