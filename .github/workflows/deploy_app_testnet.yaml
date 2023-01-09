@@ -28,12 +28,12 @@ jobs:
 
       - name: pnpm install and build
         run: |
-          pnpm install
-          pnpm build
+          npm install
+          npm run build
 
       - name: build openapi
         run: |
-          pnpm openapi
+          npm run openapi
 
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./dist
