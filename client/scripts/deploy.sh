@@ -14,5 +14,3 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
   sed -i -e "s|$OPENAPI_PATH|$PRODUCTION_OPENAPI_PATH|g" package.json
 fi
-
-next build
