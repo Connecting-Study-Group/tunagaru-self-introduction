@@ -8,34 +8,25 @@ info:
   version: "1.0"
 servers:
 - description: Local server
-  url: https://localhost:8080
+  url: http://localhost:8080
 tags:
-- description: ""
-  name: healthcheck
 - description: ""
   name: user
 paths:
-  /healthcheck:
-    get:
-      description: healthcheck
-      operationId: getHealthcheck
-      responses:
-        "200":
-          content:
-            text/plain:
-              examples:
-                example:
-                  value: OK
-              schema:
-                type: string
-          description: OK
-      summary: healthcheck
-      tags:
-      - healthcheck
-  /user:
+  /users/{uid}:
     patch:
-      description: 自己紹介作成ページで使用する
+      description: |-
+        ユーザー情報を更新する際に使用するapi。
+        uidを元に、テーブルの追加か更新かを判断する
       operationId: update-user
+      parameters:
+      - explode: false
+        in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        style: simple
       requestBody:
         $ref: '#/components/requestBodies/UpdateUserRequest'
       responses:
@@ -48,41 +39,15 @@ paths:
       summary: UpdateUser
       tags:
       - user
-    post:
-      description: Discordログイン時に使用する
-      operationId: create-user
-      requestBody:
-        $ref: '#/components/requestBodies/CreateUserRequest'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: Example response
-      summary: CreateUser
-      tags:
-      - user
 components:
   requestBodies:
-    CreateUserRequest:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/create_user_request'
-      description: ""
     UpdateUserRequest:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/update_user_request'
+      description: ""
   responses:
-    CreateUserResponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/User'
-      description: Example response
     UpdateUserResponse:
       content:
         application/json:
@@ -95,33 +60,44 @@ components:
         bio: bio
         created_at: 2000-01-23T04:56:07.000+00:00
         zenn_url: zenn_url
+        uid: uid
         updated_at: 2000-01-23T04:56:07.000+00:00
         github_url: github_url
         instagram_url: instagram_url
         web_url: web_url
         name: name
         icon_image_url: icon_image_url
+        company: company
         qiita_url: qiita_url
         id: id
         twitter_url: twitter_url
+        email: email
         status: Frontend
       properties:
         id:
           type: string
         name:
           type: string
+        uid:
+          description: Discordログインした際に取得できるIDを、UUIDとして登録する
+          type: string
+        email:
+          type: string
         bio:
           type: string
         icon_image_url:
           type: string
+        company:
+          type: string
         status:
+          description: フロントエンドエンジニアなどのエンジニアとして詳細情報
           enum:
           - Frontend
           - Backend
+          - Mobile
           - AI
           - Infra
           - Other
-          - Mobile
           type: string
         created_at:
           format: date-time
@@ -142,39 +118,26 @@ components:
         qiita_url:
           type: string
       required:
-      - icon_image_url
+      - email
       - id
       - name
+      - uid
       title: User
       type: object
       x-stoplight:
         id: mk7chflgfopnk
-    create_user_request:
-      properties:
-        name:
-          type: string
-        icon_image_url:
-          type: string
-      required:
-      - icon_image_url
-      - name
-      type: object
     update_user_request:
       properties:
         name:
+          type: string
+        email:
           type: string
         company:
           type: string
         job:
           type: string
         status:
-          enum:
-          - Backend
-          - Frontend
-          - Mobile
-          - Other
-          - Infra
-          - AI
+          description: フロントエンドエンジニアなどのエンジニアとして詳細情報
           type: string
         bio:
           type: string
@@ -194,4 +157,4 @@ components:
           type: string
       type: object
 x-stoplight:
-  id: hgz3xwl29j9ii
+  id: ma4m98588hemj

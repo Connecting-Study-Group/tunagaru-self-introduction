@@ -1,3 +1,4 @@
+import { userRepository } from './../../../modules/user.repository';
 import { discordClientId, discordClientSecret } from '@/constants/env';
 import { DiscordClient } from '@/lib/discord-client';
 import NextAuth, { type NextAuthOptions } from 'next-auth';
@@ -21,6 +22,11 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+
+  /**
+   * ログインしてるかどうかを判定するために、jwtを使用
+   */
+  session: { strategy: 'jwt' },
 
   callbacks: {
     /**
@@ -48,11 +54,18 @@ export const authOptions: NextAuthOptions = {
     },
 
     /**
-     * つながる勉強会のメンバーかどうかを判定
+     * つながる勉強会のメンバーかどうかを判定して、成功したらDBにユーザー情報を追加する
      */
-    signIn: async ({ account }) => {
-      if (account == null || account.access_token == null) return false;
-      return DiscordClient.isTsunagaruMember(account.access_token);
+    signIn: async ({ account, user, profile }) => {
+      if (account == null || account?.access_token == null) return false;
+      const isTsunagaruMember = await DiscordClient.isTsunagaruMember(account?.access_token);
+      if (isTsunagaruMember) {
+        const name = user.name ?? '';
+        const email = user.email ?? '';
+        await userRepository.updateUser(user.id, { name, email });
+        return true;
+      }
+      return false;
     },
   },
 };

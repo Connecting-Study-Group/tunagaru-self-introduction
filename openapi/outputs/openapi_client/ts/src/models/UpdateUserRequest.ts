@@ -30,6 +30,12 @@ export interface UpdateUserRequest {
      * @type {string}
      * @memberof UpdateUserRequest
      */
+    email?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateUserRequest
+     */
     company?: string;
     /**
      * 
@@ -38,11 +44,11 @@ export interface UpdateUserRequest {
      */
     job?: string;
     /**
-     * 
+     * フロントエンドエンジニアなどのエンジニアとして詳細情報
      * @type {string}
      * @memberof UpdateUserRequest
      */
-    status?: UpdateUserRequestStatusEnum;
+    status?: string;
     /**
      * 
      * @type {string}
@@ -93,21 +99,6 @@ export interface UpdateUserRequest {
     qiitaUrl?: string;
 }
 
-
-/**
- * @export
- */
-export const UpdateUserRequestStatusEnum = {
-    Backend: 'Backend',
-    Frontend: 'Frontend',
-    Mobile: 'Mobile',
-    Other: 'Other',
-    Infra: 'Infra',
-    Ai: 'AI'
-} as const;
-export type UpdateUserRequestStatusEnum = typeof UpdateUserRequestStatusEnum[keyof typeof UpdateUserRequestStatusEnum];
-
-
 /**
  * Check if a given object implements the UpdateUserRequest interface.
  */
@@ -128,6 +119,7 @@ export function UpdateUserRequestFromJSONTyped(json: any, ignoreDiscriminator: b
     return {
         
         'name': !exists(json, 'name') ? undefined : json['name'],
+        'email': !exists(json, 'email') ? undefined : json['email'],
         'company': !exists(json, 'company') ? undefined : json['company'],
         'job': !exists(json, 'job') ? undefined : json['job'],
         'status': !exists(json, 'status') ? undefined : json['status'],
@@ -152,6 +144,7 @@ export function UpdateUserRequestToJSON(value?: UpdateUserRequest | null): any {
     return {
         
         'name': value.name,
+        'email': value.email,
         'company': value.company,
         'job': value.job,
         'status': value.status,

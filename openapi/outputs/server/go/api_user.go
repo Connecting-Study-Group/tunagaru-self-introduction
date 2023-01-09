@@ -52,46 +52,19 @@ func NewUserApiController(s UserApiServicer, opts ...UserApiOption) Router {
 func (c *UserApiController) Routes() Routes {
 	return Routes{ 
 		{
-			"CreateUser",
-			strings.ToUpper("Post"),
-			"/user",
-			c.CreateUser,
-		},
-		{
 			"UpdateUser",
 			strings.ToUpper("Patch"),
-			"/user",
+			"/users/{uid}",
 			c.UpdateUser,
 		},
 	}
 }
 
-// CreateUser - CreateUser
-func (c *UserApiController) CreateUser(w http.ResponseWriter, r *http.Request) {
-	createUserRequestParam := CreateUserRequest{}
-	d := json.NewDecoder(r.Body)
-	d.DisallowUnknownFields()
-	if err := d.Decode(&createUserRequestParam); err != nil {
-		c.errorHandler(w, r, &ParsingError{Err: err}, nil)
-		return
-	}
-	if err := AssertCreateUserRequestRequired(createUserRequestParam); err != nil {
-		c.errorHandler(w, r, err, nil)
-		return
-	}
-	result, err := c.service.CreateUser(r.Context(), createUserRequestParam)
-	// If an error occurred, encode the error with the status code
-	if err != nil {
-		c.errorHandler(w, r, err, &result)
-		return
-	}
-	// If no error, encode the body and the result code
-	EncodeJSONResponse(result.Body, &result.Code, w)
-
-}
-
 // UpdateUser - UpdateUser
 func (c *UserApiController) UpdateUser(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	uidParam := params["uid"]
+	
 	updateUserRequestParam := UpdateUserRequest{}
 	d := json.NewDecoder(r.Body)
 	d.DisallowUnknownFields()
@@ -103,7 +76,7 @@ func (c *UserApiController) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		c.errorHandler(w, r, err, nil)
 		return
 	}
-	result, err := c.service.UpdateUser(r.Context(), updateUserRequestParam)
+	result, err := c.service.UpdateUser(r.Context(), uidParam, updateUserRequestParam)
 	// If an error occurred, encode the error with the status code
 	if err != nil {
 		c.errorHandler(w, r, err, &result)

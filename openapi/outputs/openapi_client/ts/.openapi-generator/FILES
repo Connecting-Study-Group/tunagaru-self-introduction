@@ -1,0 +1,13 @@
+.gitignore
+.npmignore
+README.md
+package.json
+src/apis/UserApi.ts
+src/apis/index.ts
+src/index.ts
+src/models/UpdateUserRequest.ts
+src/models/User.ts
+src/models/index.ts
+src/runtime.ts
+tsconfig.esm.json
+tsconfig.json

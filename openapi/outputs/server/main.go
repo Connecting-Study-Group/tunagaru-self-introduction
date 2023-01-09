@@ -20,13 +20,10 @@ import (
 func main() {
 	log.Printf("Server started")
 
-	HealthcheckApiService := openapi.NewHealthcheckApiService()
-	HealthcheckApiController := openapi.NewHealthcheckApiController(HealthcheckApiService)
-
 	UserApiService := openapi.NewUserApiService()
 	UserApiController := openapi.NewUserApiController(UserApiService)
 
-	router := openapi.NewRouter(HealthcheckApiController, UserApiController)
+	router := openapi.NewRouter(UserApiController)
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

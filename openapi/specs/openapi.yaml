@@ -1,6 +1,6 @@
 openapi: 3.0.2
 x-stoplight:
-  id: hgz3xwl29j9ii
+  id: ma4m98588hemj
 info:
   title: tsunagaru
   version: '1.0'
@@ -9,38 +9,10 @@ info:
     name: tsunagaru
     email: codeyy021@gmail.com
 servers:
-  - url: 'https://localhost:8080'
+  - url: 'http://localhost:8080'
     description: Local server
 paths:
-  /healthcheck:
-    get:
-      summary: healthcheck
-      description: healthcheck
-      tags:
-        - healthcheck
-      responses:
-        '200':
-          description: OK
-          content:
-            text/plain:
-              schema:
-                type: string
-              examples:
-                example:
-                  value: OK
-      operationId: getHealthcheck
-  /user:
-    post:
-      summary: CreateUser
-      tags:
-        - user
-      operationId: create-user
-      responses:
-        '200':
-          $ref: '#/components/responses/CreateUserResponse'
-      description: Discordログイン時に使用する
-      requestBody:
-        $ref: '#/components/requestBodies/CreateUserRequest'
+  '/users/{uid}':
     patch:
       summary: UpdateUser
       operationId: update-user
@@ -49,12 +21,18 @@ paths:
       responses:
         '200':
           $ref: '#/components/responses/UpdateUserResponse'
-      description: 自己紹介作成ページで使用する
+      description: |-
+        ユーザー情報を更新する際に使用するapi。
+        uidを元に、テーブルの追加か更新かを判断する
       requestBody:
         $ref: '#/components/requestBodies/UpdateUserRequest'
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
 tags:
-  - name: healthcheck
-    description: ''
   - name: user
     description: ''
 components:
@@ -69,19 +47,27 @@ components:
           type: string
         name:
           type: string
+        uid:
+          type: string
+          description: Discordログインした際に取得できるIDを、UUIDとして登録する
+        email:
+          type: string
         bio:
           type: string
         icon_image_url:
+          type: string
+        company:
           type: string
         status:
           type: string
           enum:
             - Frontend
             - Backend
+            - Mobile
             - AI
             - Infra
             - Other
-            - Mobile
+          description: フロントエンドエンジニアなどのエンジニアとして詳細情報
         created_at:
           type: string
           format: date-time
@@ -103,22 +89,9 @@ components:
       required:
         - id
         - name
-        - icon_image_url
+        - uid
+        - email
   requestBodies:
-    CreateUserRequest:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-              icon_image_url:
-                type: string
-            required:
-              - name
-              - icon_image_url
-      description: ''
     UpdateUserRequest:
       content:
         application/json:
@@ -127,19 +100,15 @@ components:
             properties:
               name:
                 type: string
+              email:
+                type: string
               company:
                 type: string
               job:
                 type: string
               status:
                 type: string
-                enum:
-                  - Backend
-                  - Frontend
-                  - Mobile
-                  - Other
-                  - Infra
-                  - AI
+                description: フロントエンドエンジニアなどのエンジニアとして詳細情報
               bio:
                 type: string
               icon_image_url:
@@ -156,13 +125,8 @@ components:
                 type: string
               qiita_url:
                 type: string
+      description: ''
   responses:
-    CreateUserResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/User'
     UpdateUserResponse:
       description: Example response
       content:
