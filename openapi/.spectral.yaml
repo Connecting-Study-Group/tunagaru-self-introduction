@@ -1,0 +1,19 @@
+extends: ['spectral:oas', 'spectral:asyncapi']
+aliases:
+  PathItem:
+    - $.paths[*]
+  OperationObject:
+    - '#PathItem[get,put,post,delete,options,head,patch,trace]'
+rules:
+  oas3-valid-media-example: off
+  operation-tags: error
+  operation-id-camel-case:
+    description: Operation IDs must be camelCase since some generators (e.g. RTK Query) don't support kebab-cases.
+    message: 'Operation ID "{{value}}" must be camelCase since some generators (e.g. RTK Query) don''t support kebab-cases.'
+    given: '#OperationObject'
+    severity: error
+    then:
+      field: operationId
+      function: casing
+      functionOptions:
+        type: camel
