@@ -15,7 +15,4 @@ else
   sed -i -e "s|$OPENAPI_PATH|$PRODUCTION_OPENAPI_PATH|g" package.json
 fi
 
-pnpm install
-
-# ビルド
-pnpm build
+next build
