@@ -1,7 +1,7 @@
 set -eux
 
 OPENAPI_PATH="../openapi/outputs/openapi_client/ts"
-PRODUCTION_OPENAPI_PATH="./openapi_client/ts"
+PRODUCTION_OPENAPI_PATH="./src/openapi"
 
 rm -rf $PRODUCTION_OPENAPI_PATH
 mkdir -p $PRODUCTION_OPENAPI_PATH

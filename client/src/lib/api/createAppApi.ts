@@ -1,5 +1,5 @@
 import { apiBaseUrl } from '@/constants/env';
-import { Configuration, UserApi } from 'openapi-app-client';
+import { Configuration, UserApi } from '@/openapi/src';
 
 export const createAppApi = () => {
   const config = new Configuration({
