@@ -50,7 +50,7 @@ jobs:
         run: pnpm i
 
       - name: build openapi
-        run: ./scripts/deploy_testnet.sh
+        run: ./scripts/deploy.sh
 
       - name: Deploy to netlify
         run: npx netlify-cli deploy --dir=./dist
