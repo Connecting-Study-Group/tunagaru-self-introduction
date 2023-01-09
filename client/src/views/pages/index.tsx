@@ -1,5 +1,4 @@
 import { Text, Paper, Box, Button } from '@mantine/core';
-import Image from 'next/image';
 import Link from 'next/link';
 import { FC } from 'react';
 import { Spacer } from '../components/system/Spacer';
@@ -13,7 +12,7 @@ export const IndexPage: FC = () => {
       <Box sx={{ display: 'flex' }}>
         <Spacer />
         <Paper shadow="md" p="md" radius={16} sx={{ display: 'inline-flex' }}>
-          <Image src="/images/logo.svg" width={120} height={120} alt="つながるLT" />
+          <img src="/images/logo.svg" width={120} height={120} alt="つながるLT" />
         </Paper>
         <Spacer />
       </Box>
