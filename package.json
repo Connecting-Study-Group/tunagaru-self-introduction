@@ -1,0 +1,19 @@
+{
+  "name": "tsunagaru-self-introduction",
+  "version": "1.0.0",
+  "description": "## Tech Stack",
+  "main": "index.js",
+  "scripts": {
+    "deploy:server": "./server/deploy.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Connecting-Study-Group/tunagaru-self-introduction.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Connecting-Study-Group/tunagaru-self-introduction/issues"
+  },
+  "homepage": "https://github.com/Connecting-Study-Group/tunagaru-self-introduction#readme"
+}
