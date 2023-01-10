@@ -61,9 +61,13 @@ func main() {
 	openapi.RegisterHandlers(e, server)
 
 	// 0.0.0.0:$PORTをリッスンする
-
 	var PORT = os.Getenv("PORT")
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", PORT)))
+	if PORT == "" {
+		PORT = "8080"
+	}
+
+	e.Logger.Fatal(e.Start(":" + PORT))
+
 }
 
 const (
