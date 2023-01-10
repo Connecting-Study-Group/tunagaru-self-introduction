@@ -17,7 +17,6 @@ export type UpdateUser = {
 
 export const userRepository = {
   async updateUser(uid: string, params: UpdateUser) {
-    const res = await api.user.updateUser({ uid, updateUserRequest: params });
-    return res;
+    await api.user.updateUser({ uid, updateUserRequest: params });
   },
 };

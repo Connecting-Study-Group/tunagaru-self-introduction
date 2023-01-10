@@ -69,7 +69,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
 
-  secret: nextAuthSecret,
+  // secret: nextAuthSecret,
 };
 
 export default NextAuth(authOptions);

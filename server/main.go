@@ -14,11 +14,16 @@ import (
 
 	"github.com/deepmap/oapi-codegen/pkg/middleware"
 	"github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	echomiddleware "github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
+	err := godotenv.Load(fmt.Sprintf("env/%s.env", os.Getenv("GO_ENV")))
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
 	api.ConnectDB()
 	flag.Parse()
 
