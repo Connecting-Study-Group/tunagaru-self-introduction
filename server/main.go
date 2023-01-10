@@ -20,7 +20,6 @@ import (
 
 func main() {
 	api.ConnectDB()
-	var port = flag.Int("port", 8080, "Port for test HTTP server")
 	flag.Parse()
 
 	// NOTE: APIスキーマ定義を取得
@@ -61,11 +60,10 @@ func main() {
 	// NOTE: 上記の NewServer をインターフェースのハンドラとして登録します。
 	openapi.RegisterHandlers(e, server)
 
-	// NOTE: そして、世界が終わるまで、HTTPに仕えるのです。(Deepelの翻訳)
-	// e.Logger.Fatal(e.Start(fmt.Sprintf("0.0.0.0:%d", *port)))
+	// 0.0.0.0:$PORTをリッスンする
 
-	// 本番環境にデプロイするときは、下記のようにする
-	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", *port)))
+	var PORT = os.Getenv("PORT")
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", PORT)))
 }
 
 const (
