@@ -43,7 +43,7 @@ func main() {
 
 	// NOTE: すべてのリクエストをログに記録する
 	e.Use(echomiddleware.CORSWithConfig(echomiddleware.CORSConfig{
-		AllowOrigins: []string{"http://localhost:3000"},
+		AllowOrigins: []string{"http://localhost:3000", "https://tunagaru-self-introduction-production.up.railway.app/"},
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 
@@ -62,7 +62,10 @@ func main() {
 	openapi.RegisterHandlers(e, server)
 
 	// NOTE: そして、世界が終わるまで、HTTPに仕えるのです。(Deepelの翻訳)
-	e.Logger.Fatal(e.Start(fmt.Sprintf("0.0.0.0:%d", *port)))
+	// e.Logger.Fatal(e.Start(fmt.Sprintf("0.0.0.0:%d", *port)))
+
+	// 本番環境にデプロイするときは、下記のようにする
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", *port)))
 }
 
 const (
