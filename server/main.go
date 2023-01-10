@@ -34,6 +34,9 @@ func main() {
 		os.Exit(1)
 	}
 
+	host := os.Getenv("MYSQLPASSWORD")
+	fmt.Println(host)
+
 	// NOTE:
 	// swagger の仕様にある servers 配列を消去し、サーバ名が一致するかどうかの検証を省略する。
 	// サーバ名が一致するかどうかの検証は省略されます。これがどのように実行されるかはわからない。

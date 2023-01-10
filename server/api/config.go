@@ -17,6 +17,8 @@ func ConnectDB() error {
 		return err
 	}
 
+	// os.Getenv("MYSQLHOST"):os.Getenv("MYSQLHOST")を変数化
+
 	c := mysql.Config{
 		DBName: os.Getenv("MYSQLDATABASE"),
 		User:   os.Getenv("MYSQLUSER"),
